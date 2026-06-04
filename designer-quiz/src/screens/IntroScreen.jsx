@@ -259,6 +259,61 @@ export default function IntroScreen({ onStart }) {
           </p>
         </div>
       </main>
+
+      {/* Footer — version + credit + copyright */}
+      <div
+        style={{
+          position: "fixed",
+          bottom: 20,
+          left: 24,
+          right: 24,
+          display: "flex",
+          alignItems: "flex-end",
+          justifyContent: "space-between",
+          zIndex: 1,
+          pointerEvents: "none",
+        }}
+      >
+        {/* Left — credit + version */}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 2 }}>
+          <p
+            style={{
+              fontFamily: "var(--font-ui)",
+              fontSize: 10,
+              fontWeight: 500,
+              color: "#F0EDE8",
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+            }}
+          >
+            Developed by JDB
+          </p>
+          <p
+            style={{
+              fontFamily: "var(--font-ui)",
+              fontSize: 10,
+              fontWeight: 400,
+              color: "#888580",
+              letterSpacing: "0.06em",
+            }}
+          >
+            v1.0
+          </p>
+        </div>
+
+        {/* Right — copyright */}
+        <p
+          style={{
+            fontFamily: "var(--font-ui)",
+            fontSize: 10,
+            fontWeight: 400,
+            color: "#888580",
+            letterSpacing: "0.06em",
+          }}
+        >
+          © 2026
+        </p>
+      </div>
     </div>
   );
 }
