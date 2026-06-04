@@ -1,0 +1,7 @@
+{
+  "buildCommand": "cd designer-quiz && npm install && npm run build",
+  "outputDirectory": "designer-quiz/dist",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
