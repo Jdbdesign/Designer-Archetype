@@ -20,6 +20,7 @@ export default function ResultScreen({ result, scores, currentWisdomIndex, onRet
   const [showShareCard, setShowShareCard] = useState(false);
   const [savingCard, setSavingCard] = useState(false);
   const [sharingCard, setSharingCard] = useState(false);
+  const [copiedCaption, setCopiedCaption] = useState(false);
   const contentRef = useRef(null);
   const hiddenCardRef = useRef(null);
   const archetype = ARCHETYPES[result];
@@ -247,6 +248,26 @@ ${htmlContent}
   const handleCloseShareCard = () => {
     setShowShareCard(false);
     document.body.style.overflow = "";
+  };
+
+  const handleCopyCaption = async () => {
+    try {
+      await navigator.clipboard.writeText(shareText);
+      setCopiedCaption(true);
+      setTimeout(() => setCopiedCaption(false), 2000);
+    } catch {
+      // fallback for older browsers
+      const ta = document.createElement("textarea");
+      ta.value = shareText;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+      setCopiedCaption(true);
+      setTimeout(() => setCopiedCaption(false), 2000);
+    }
   };
 
   const canNativeShare = typeof navigator !== "undefined" && !!navigator.share;
@@ -494,6 +515,72 @@ ${htmlContent}
               <ShareCard archetype={archetype} cardRef={null} />
             </div>
 
+            {/* Caption / body text */}
+            <div
+              style={{
+                marginTop: 16,
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.1)",
+                borderRadius: 12,
+                padding: "14px 16px",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  marginBottom: 10,
+                }}
+              >
+                <p
+                  style={{
+                    fontFamily: "var(--font-ui)",
+                    fontWeight: 600,
+                    fontSize: 10,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.12em",
+                    color: "#888580",
+                  }}
+                >
+                  Caption to attach
+                </p>
+                <button
+                  data-cursor-hover
+                  onClick={handleCopyCaption}
+                  style={{
+                    fontFamily: "var(--font-ui)",
+                    fontWeight: 600,
+                    fontSize: 11,
+                    color: copiedCaption ? "#4ade80" : archetype.primary,
+                    background: "transparent",
+                    border: `1px solid ${copiedCaption ? "#4ade8044" : archetype.primary + "44"}`,
+                    borderRadius: 8,
+                    cursor: "none",
+                    padding: "4px 10px",
+                    transition: "color 150ms ease, border-color 150ms ease",
+                    letterSpacing: "0.02em",
+                  }}
+                >
+                  {copiedCaption ? "✓ Copied!" : "Copy"}
+                </button>
+              </div>
+              <pre
+                style={{
+                  fontFamily: "var(--font-ui)",
+                  fontWeight: 400,
+                  fontSize: 12,
+                  color: "#C8C4BE",
+                  lineHeight: 1.65,
+                  whiteSpace: "pre-wrap",
+                  wordBreak: "break-word",
+                  margin: 0,
+                }}
+              >
+                {shareText}
+              </pre>
+            </div>
+
             {/* Primary actions */}
             <div style={{ display: "flex", gap: 10, marginTop: 14 }}>
               <button
@@ -631,7 +718,7 @@ ${htmlContent}
                 letterSpacing: "0.03em",
               }}
             >
-              Save the card image · Share via your preferred app
+              Save the image · Copy caption · Share via your preferred app
             </p>
           </div>
         </div>
