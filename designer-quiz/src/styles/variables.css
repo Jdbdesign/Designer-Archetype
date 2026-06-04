@@ -1,0 +1,32 @@
+/* Archetype color custom properties */
+:root {
+  --sa-primary: #3B82F6;
+  --sa-glow: rgba(59,130,246,0.15);
+  --sa-light: #93C5FD;
+  --sa-dark-bg: #0C1829;
+
+  --vp-primary: #F97316;
+  --vp-glow: rgba(249,115,22,0.15);
+  --vp-light: #FED7AA;
+  --vp-dark-bg: #1C0F05;
+
+  --uw-primary: #10B981;
+  --uw-glow: rgba(16,185,129,0.15);
+  --uw-light: #6EE7B7;
+  --uw-dark-bg: #041C12;
+
+  --ca-primary: #8B5CF6;
+  --ca-glow: rgba(139,92,246,0.15);
+  --ca-light: #C4B5FD;
+  --ca-dark-bg: #100820;
+
+  --sp-primary: #F59E0B;
+  --sp-glow: rgba(245,158,11,0.15);
+  --sp-light: #FDE68A;
+  --sp-dark-bg: #1C1404;
+
+  --bb-primary: #EC4899;
+  --bb-glow: rgba(236,72,153,0.15);
+  --bb-light: #FBCFE8;
+  --bb-dark-bg: #1C0712;
+}
